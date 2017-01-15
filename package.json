@@ -5,6 +5,7 @@
   "dependenceis": {},
   "dependencies": {
     "express": "^4.10.2",
+    "nodemon": "^1.11.0",
     "socket.io": "^1.7.2"
   }
 }
