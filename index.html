@@ -21,9 +21,30 @@ form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 
         <script src="/socket.io/socket.io.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>      
         <script>
+
+            function storeInLocalStorage(m) {
+                currMessages = "";
+                if(localStorage.getItem('messages')) {
+                    currMessages = localStorage.getItem('messages');
+                }
+                currMessages = currMessages + '\n' + m
+                
+                // If localStorage is full, splits the currently-stored
+                // conversation in half and stores that instead
+                try {
+                    localStorage.setItem('messages', currMessages);   
+                } catch(e) {
+                    lines = currMessages.split(/\r?\n/);
+                    lines.splice(0, lines.length/2);
+                    currMessages = lines.join("\n");
+                    localStorage.setItem('messages', currMessages);
+                }
+            }
+
             var socket = io();
             $('form').submit(function() {
                 socket.emit('chat message', $('#m').val());
+                storeInLocalStorage($('#m').val());
                 $('#m').val('');
                 return false;
             });
