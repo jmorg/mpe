@@ -17,7 +17,7 @@
         <div class="outer">
             <div style="display: none" id="share-image-pop" class="pop-up">
                 <h3 class="popup-title"> Share Image </h3>
-                 <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/file_upload" target="uploader_iframe">
+                 <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/img_upload" target="uploader_iframe">
                     <div class="form-group">
                         <input class="file-button" type="file" name="file">
                         <label style="margin-left: 4%">Caption (Optional) </label><input id="img-caption" type="text">
@@ -32,6 +32,14 @@
         <div class="outer">
             <div style="display: none"  id="share-video-pop" class="pop-up">
                 <h3 class="popup-title"> Share Video </h3>
+                <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/vid_upload" target="uploader_iframe">
+                    <div class="form-group">
+                        <input class="file-button" type="file" name="file">
+                        <label style="margin-left: 4%">Caption (Optional) </label><input id="img-caption" type="text">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
                 <button class="close-button" type="button"> Close </button>
             </div>
         </div>
@@ -39,6 +47,28 @@
         <div class="outer">
             <div style="display: none"  id="share-voice-pop" class="pop-up">
                 <h3  class="popup-title"> Share Voice </h3>
+                <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/voice_upload" target="uploader_iframe">
+                    <div class="form-group">
+                        <input class="file-button" type="file" name="file">
+                        <label style="margin-left: 4%">Caption (Optional) </label><input id="img-caption" type="text">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+                <button class="close-button" type="button"> Close </button>
+            </div>
+        </div>
+
+        <div class="outer">
+            <div style="display: none"  id="share-link-pop" class="pop-up">
+                <h3  class="popup-title"> Share Link </h3>
+                <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/link_upload" target="uploader_iframe">
+                    <div class="form-group">
+                        <label style="margin-left: 4%">Link: </label><input id="hyperlink" name="hyperlink" type="text">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
                 <button class="close-button" type="button"> Close </button>
             </div>
         </div>
@@ -48,10 +78,14 @@
                 <p id="share-image-help" style="display: none;"> Share Image </p>
                 <p id="share-video-help" style="display: none;"> Share Video </p>
                 <p id="share-voice-help" style="display: none;"> Share Voice Note </p>
+                <p id="share-link-help" style="display: none;"> Share Link </p>
+
                 <button id="share-image" data-toggle="modal" data-target="#blah" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-picture" style="size: 10px"></span></button>
                 <button id="share-video" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-film"></span> </button>
                 <button id="share-voice" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-headphones"></span></button>
+                <button id="share-link" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-qrcode"></span></button>
             </div>
+
         </div>
         <form id="text-message" action="">
             <input id="m" autocomplete="off" /><button>Send</button>
@@ -90,25 +124,17 @@
 
              var socket = io();
               $('#text-message').submit(function(){
-                socket.emit('chat', $('#m').val());
+                socket.emit('chat message', $('#m').val());
                 $('#m').val('');
                 return false;
               });
 
-              socket.on('chat', function(msg){
-                $('#messages').append($('<li>').text(msg));
+              socket.on('chat message', function(msg){
+                 var timeStamp = "<span class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></span>"
+                 
+                $('#messages').append($("<li><p>" + msg + timeStamp + "</p><br/></li>"));
               });
-            
-        socket.on('get file', function(path) {
-            var caption = document.getElementById('img-caption').value;
-            var imgCode = '<img style="width:40%; height: 40%" src="' + path +'"></img>';
-            var captionCode = '<p>Comment:' + caption + '</p>';
-            var timeStamp = "<p class='time'>" +  new Date().toLocaleString() + "</p>"
-            var totalCode = '<li>' + imgCode + captionCode + '</li>';
-            storeInLocalStorage(totalCode);
-            $("#messages").append(totalCode);
-            $(".close-button").click();
-        });
+
         </script>
     </body>
 </html>

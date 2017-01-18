@@ -2,16 +2,52 @@
 
         var socket = io();
 
-        socket.on('get file', function(path) {
+        socket.on('get img', function(path) {
             var caption = document.getElementById('img-caption').value;
             var imgCode = '<img style="width:40%; height: 40%" src="' + path +'"></img>';
             var captionCode = '<p>Comment:' + caption + '</p>';
-            var timeStamp = "<p class='time'>" +  new Date().toLocaleString() + "</p>"
-            var totalCode = '<li>' + imgCode + captionCode + '</li>';
+            var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
+            var totalCode = '<li>' + imgCode + captionCode + timeStamp + '<br/></li>';
             storeInLocalStorage(totalCode);
             $("#messages").append(totalCode);
             $(".close-button").click();
         });
+
+        socket.on('get vid', function(path) {
+            var caption = document.getElementById('img-caption').value;
+            var vidCode = '<video width="400" controls> <source src="'+ path + '" type="video/mp4"></video>';
+            var captionCode = '<p>Comment:' + caption + '</p>';
+            var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
+            var totalCode = '<li>' + vidCode + captionCode + timeStamp + '<br/></li>';
+            storeInLocalStorage(totalCode);
+            $("#messages").append(totalCode);
+            $(".close-button").click();
+        });
+
+        socket.on('get voice', function(path) {
+            var caption = document.getElementById('img-caption').value;
+            var voiceCode = '<audio controls><source src="' + path + '" type="audio/mp3"></audio>';
+            var captionCode = '<p>Comment:' + caption + '</p>';
+            var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
+            var totalCode = '<li>' + voiceCode + captionCode + timeStamp + '<br/></li>';
+            storeInLocalStorage(totalCode);
+            $("#messages").append(totalCode);
+            $(".close-button").click();
+        });
+
+        socket.on('get link', function(togo) {
+            var linkToGo = document.getElementById('hyperlink').value;
+            var frame = '<iframe frameborder="3" width="750px" height="750px" src="' + linkToGo + '"></iframe>';
+            var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
+
+            var totalCode ='<li>' + frame + timeStamp + "</li>"
+             storeInLocalStorage(totalCode);
+            $("#messages").append(totalCode);
+            $(".close-button").click();
+        });
+
+
+
         $(".close-button").click(function(){
             $(".pop-up").hide();
         });
@@ -19,6 +55,11 @@
         $('#share-image').click(function(){
             $("#share-image-pop").show();
         });
+
+        $('#share-link').click(function(){
+            $("#share-link-pop").show();
+        });
+
 
         $('#share-video').click(function(){
             $("#share-video-pop").show();
@@ -35,6 +76,15 @@
                 $("#share-image-help").hide();
         }
         );
+
+         $('#share-link').hover(
+            function(){
+                $("#share-link-help").show();
+            }, function() {
+                $("#share-link-help").hide();
+        }
+        );
+
 
         $('#share-video').hover(
             function(){

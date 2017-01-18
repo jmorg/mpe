@@ -35,12 +35,20 @@ form button
     padding: 10px;
 }
 
-p.time
+.time
 {
     font-size: 0.75em;
+    float: right;
 }
 
 #img-caption
+{
+    border: 1px solid black;
+    margin-left: 5%;
+}
+
+
+#hyperlink
 {
     border: 1px solid black;
     margin-left: 5%;
@@ -125,6 +133,8 @@ p.time
     list-style-type: none; 
     margin: 0; 
     padding: 0; 
+    margin-bottom: 13%;
+    width: 100%;
 }
 
 #messages li 
