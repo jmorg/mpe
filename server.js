@@ -20,7 +20,6 @@ app.get('/main.js', function(req, res) {
     res.sendFile(__dirname + '/main.js');
  });
 
-
 app.get('/main.css', function(req, res) {
     res.sendFile(__dirname + '/main.css');
  });
@@ -42,58 +41,13 @@ app.post('/file_upload', upload.single('file'), function(req, res, next) {
   fs.rename(req.file.path, file, function(err) {
     if (err) {
       console.log(err);
-      res.send(500);
+      res.sendStatus(500);
     } else {
         io.emit('get file', file);
-      // res.send({file: req.file.path});
+        res.end();
     }
   });
 });
-
-// io.sockets.on('connection', function(socket){
-//   var delivery = dl.listen(socket);
-//   delivery.on('delivery.connect',function(delivery){
- 
-//     delivery.send({
-//       name: 'sample-image.jpg',
-//       path : './sample-image.jpg',
-//       params: {foo: 'bar'}
-//     });
- 
-//     delivery.on('send.success',function(file){
-//       console.log('File successfully sent to client!');
-//     });
- 
-//   });
-// });
-
-// io.on('connection', function(socket) {
-//     console.log('a user connected');
-//     socket.on('disconnect', function() {
-//         console.log('user disconnected');
-//     });
-
-//     var delivery = dl.listen(socket);
-//     delivery.on('receive.success',function(file){
-//     var params = file.params;
-//     fs.writeFile(file.name,file.buffer, function(err){
-//       if(err){
-//         console.log('File could not be saved.');
-//       }else{
-//         console.log('File saved.');
-//       };
-//     });
-//   });
-
-//     socket.on('chat message', function(msg) {
-//         console.log('message: ' + msg);
-//         io.emit('chat message', msg);
-//     });
-   
-// });
-
-
-
 
 http.listen(process.env.PORT || 5000, function() {
     console.log('listening on ' + process.env.PORT || 5000);

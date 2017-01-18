@@ -17,12 +17,14 @@
         <div class="outer">
             <div style="display: none" id="share-image-pop" class="pop-up">
                 <h3 class="popup-title"> Share Image </h3>
-                 <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/file_upload">
+                 <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/file_upload" target="uploader_iframe">
                     <div class="form-group">
                         <input class="file-button" type="file" name="file">
+                        <label style="margin-left: 4%">Caption (Optional) </label><input id="img-caption" type="text">
                         <input class="send-button" name="submit" type="submit" value="Send">
                     </div>
                 </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
                 <button class="close-button" type="button"> Close </button>
             </div>
         </div>
@@ -93,10 +95,10 @@
                 $('#m').val('');
                 return false;
             });
+
             socket.on('chat message', function(msg) {
                 $('#messages').append($('<li>').text(msg));
             });
-
 
         </script>
     </body>

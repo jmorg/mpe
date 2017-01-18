@@ -1,8 +1,15 @@
    $(document).ready(function(){
 
         var socket = io();
+
         socket.on('get file', function(path) {
-            $("#messages").append('<li><img style="width: 25%; height: 25%" src="' + path +'"></img></li>');
+            var caption = document.getElementById('img-caption').value;
+            var imgCode = '<img style="width:40%; height: 40%" src="' + path +'"></img>';
+            var captionCode = '<p>Comment:' + caption + '</p>';
+            var timeStamp = "<p class='time'>" +  new Date().toLocaleString() + "</p>"
+            var totalCode = '<li>' + imgCode + captionCode + '</li>';
+            storeInLocalStorage(totalCode);
+            $("#messages").append(totalCode);
             $(".close-button").click();
         });
         $(".close-button").click(function(){

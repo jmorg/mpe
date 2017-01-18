@@ -35,6 +35,17 @@ form button
     padding: 10px;
 }
 
+p.time
+{
+    font-size: 0.75em;
+}
+
+#img-caption
+{
+    border: 1px solid black;
+    margin-left: 5%;
+}
+
 .upload-file
 {
     background: white;
