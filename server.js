@@ -4,10 +4,15 @@ var io = require('socket.io')(http);
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
- });
+});
+
 app.get('/main.js', function(req, res) {
     res.sendFile(__dirname + '/main.js');
- });
+});
+
+app.get('/styles.css', function(req, res) {
+    res.sendFile(__dirname + '/styles.css');
+});
 
 
 io.on('connection', function(socket) {
