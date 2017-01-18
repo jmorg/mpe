@@ -20,6 +20,7 @@ app.get('/main.js', function(req, res) {
     res.sendFile(__dirname + '/main.js');
  });
 
+
 app.get('/main.css', function(req, res) {
     res.sendFile(__dirname + '/main.css');
  });
@@ -44,7 +45,7 @@ app.post('/file_upload', upload.single('file'), function(req, res, next) {
       res.sendStatus(500);
     } else {
         io.emit('get file', file);
-        res.end();
+        res.sendStatus(200);
     }
   });
 });

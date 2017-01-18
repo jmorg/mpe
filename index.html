@@ -53,7 +53,7 @@
                 <button id="share-voice" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-headphones"></span></button>
             </div>
         </div>
-        <form class="text-messsage" action="">
+        <form id="text-message" action="">
             <input id="m" autocomplete="off" /><button>Send</button>
         </form>
         <script src="/socket.io/socket.io.js"></script>
@@ -88,18 +88,27 @@
                 }
             }
 
-            var socket = io();
-            $('.text-message').submit(function() {
-                socket.emit('chat message', $('#m').val());
-                storeInLocalStorage($('#m').val());
+             var socket = io();
+              $('#text-message').submit(function(){
+                socket.emit('chat', $('#m').val());
                 $('#m').val('');
                 return false;
-            });
+              });
 
-            socket.on('chat message', function(msg) {
+              socket.on('chat', function(msg){
                 $('#messages').append($('<li>').text(msg));
-            });
-
+              });
+            
+        socket.on('get file', function(path) {
+            var caption = document.getElementById('img-caption').value;
+            var imgCode = '<img style="width:40%; height: 40%" src="' + path +'"></img>';
+            var captionCode = '<p>Comment:' + caption + '</p>';
+            var timeStamp = "<p class='time'>" +  new Date().toLocaleString() + "</p>"
+            var totalCode = '<li>' + imgCode + captionCode + '</li>';
+            storeInLocalStorage(totalCode);
+            $("#messages").append(totalCode);
+            $(".close-button").click();
+        });
         </script>
     </body>
 </html>
