@@ -31,17 +31,25 @@ function loadAllLocalStorage() {
 }
 
 var socket = io();
-$('form').submit(function() {
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
-});
 
-socket.on('chat message', function(msg) {
-    $('#messages').append($('<li>').text(msg));
-    storeInLocalStorage();
-});
+
+// socket.on('chat message', function(msg) {
+//     $('#messages').append($('<li>').text(msg));
+//     storeInLocalStorage();
+// });
 
 socket.on('load local storage', function() {
     loadAllLocalStorage();
 });
+
+  $('#text-message').submit(function(){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('');
+    return false;
+  });
+
+  socket.on('chat message', function(msg){
+     var timeStamp = "<span class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></span>"
+    $('#messages').append($("<li><p>" + msg + timeStamp + "</p><br/></li>"));
+    storeInLocalStorage();
+  });

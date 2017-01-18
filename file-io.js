@@ -8,7 +8,7 @@
             var captionCode = '<p>Comment:' + caption + '</p>';
             var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
             var totalCode = '<li>' + imgCode + captionCode + timeStamp + '<br/></li>';
-            storeInLocalStorage(totalCode);
+             storeInLocalStorage();
             $("#messages").append(totalCode);
             $(".close-button").click();
         });
@@ -19,7 +19,7 @@
             var captionCode = '<p>Comment:' + caption + '</p>';
             var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
             var totalCode = '<li>' + vidCode + captionCode + timeStamp + '<br/></li>';
-            storeInLocalStorage(totalCode);
+             storeInLocalStorage();
             $("#messages").append(totalCode);
             $(".close-button").click();
         });
@@ -30,7 +30,7 @@
             var captionCode = '<p>Comment:' + caption + '</p>';
             var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
             var totalCode = '<li>' + voiceCode + captionCode + timeStamp + '<br/></li>';
-            storeInLocalStorage(totalCode);
+             storeInLocalStorage();
             $("#messages").append(totalCode);
             $(".close-button").click();
         });
@@ -41,12 +41,17 @@
             var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
 
             var totalCode ='<li>' + frame + timeStamp + "</li>"
-             storeInLocalStorage(totalCode);
+            storeInLocalStorage();
             $("#messages").append(totalCode);
             $(".close-button").click();
         });
 
 
+        $('#text-message').submit(function(){
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('');
+            return false;
+         });
 
         $(".close-button").click(function(){
             $(".pop-up").hide();
