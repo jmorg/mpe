@@ -5,6 +5,10 @@ var io = require('socket.io')(http);
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
  });
+app.get('/main.js', function(req, res) {
+    res.sendFile(__dirname + '/main.js');
+ });
+
 
 io.on('connection', function(socket) {
     console.log('a user connected');
@@ -19,8 +23,8 @@ io.on('connection', function(socket) {
 });
 
 
-http.listen(3000, function() {
-    console.log('listening on *:3000');
+http.listen(process.env.PORT || 5000, function() {
+    console.log('listening on ' + process.env.PORT || 5000);
 });
 
 

@@ -2,7 +2,6 @@
   "name": "team8-chat",
   "version": "0.0.1",
   "description": "webchat app for cs210",
-  "dependenceis": {},
   "dependencies": {
     "express": "^4.10.2",
     "nodemon": "^1.11.0",
