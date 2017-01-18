@@ -3,123 +3,26 @@
     <head>
         <title>Socket.IO chat</title>
         <script src="main.js"></script>
-        <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font: 13px Helvetica, Arial; }
-form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-form button 
-{ 
-    width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="file-io.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-.fileshare-bar
-{
-    width: 100%; 
-    text-align: center; 
-    position: fixed; 
-    bottom: 8%;}
-}
-
-.file-buttons 
-{
-    display: inline-block;
-}
-
-.outer
-{
-    width: 100%;
-    height: 100%;
-    vertical-align: middle;
-}
-
-.pop-up 
-{ 
-    width: 50%;
-    height: 30%;
-    top: 25%;
-    left: 25%;
-    position: fixed;
-    background-color: white; 
-    border: 1px solid black; 
-    box-shadow: 1px 1px 1px #888888;
-}
-
-.close-button
-{ 
-    width: 12%; 
-    height: 5%; 
-    position: fixed;
-    top: 48%;
-    left: 58%;
-    border: 2px solid black;
-    background: white; color: black;
-}
-
-.popup-title
-{
-    font-size: 1.2em;
-    font-family: arial;
-    margin-left: 2%;
-    padding: 1px;
-}
-#messages { list-style-type: none; margin: 0; padding: 0; }
-#messages li { padding: 5px 10px; }
-#messages li:nth-child(odd) { background: #eee; }
- </style>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       
     </head>
     <body>
-<script>
-    $(document).ready(function(){
-        $(".close-button").click(function(){
-            $(".pop-up").hide();
-        });
-
-        $('#share-image').click(function(){
-            $("#share-image-pop").show();
-        });
-
-        $('#share-video').click(function(){
-            $("#share-video-pop").show();
-        });
-
-        $('#share-voice').click(function(){
-            $("#share-voice-pop").show();
-        });
-
-        $('#share-image').hover(
-            function(){
-                $("#share-image-help").show();
-            }, function() {
-                $("#share-image-help").hide();
-        }
-        );
-
-        $('#share-video').hover(
-            function(){
-                $("#share-video-help").show();
-            }, function() {
-                $("#share-video-help").hide();
-        }
-        );
-
-        $('#share-voice').hover(
-            function(){
-                $("#share-voice-help").show();
-            }, function() {
-                $("#share-voice-help").hide();
-        }
-        );
-    });
-</script>
         <ul id="messages"></ul>
         <div class="outer">
             <div style="display: none" id="share-image-pop" class="pop-up">
                 <h3 class="popup-title"> Share Image </h3>
+                 <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/file_upload">
+                    <div class="form-group">
+                        <input class="file-button" type="file" name="file">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
                 <button class="close-button" type="button"> Close </button>
             </div>
         </div>
@@ -148,7 +51,7 @@ form button
                 <button id="share-voice" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-headphones"></span></button>
             </div>
         </div>
-        <form action="">
+        <form class="text-messsage" action="">
             <input id="m" autocomplete="off" /><button>Send</button>
         </form>
         <script src="/socket.io/socket.io.js"></script>
@@ -184,7 +87,7 @@ form button
             }
 
             var socket = io();
-            $('form').submit(function() {
+            $('.text-message').submit(function() {
                 socket.emit('chat message', $('#m').val());
                 storeInLocalStorage($('#m').val());
                 $('#m').val('');
@@ -193,6 +96,8 @@ form button
             socket.on('chat message', function(msg) {
                 $('#messages').append($('<li>').text(msg));
             });
+
+
         </script>
     </body>
 </html>

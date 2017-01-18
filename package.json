@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "webchat app for cs210",
   "dependencies": {
+    "body-parser": "^1.16.0",
     "express": "^4.10.2",
+    "multer": "^1.2.1",
     "nodemon": "^1.11.0",
     "socket.io": "^1.7.2"
   }
