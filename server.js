@@ -16,6 +16,7 @@ app.get('/styles.css', function(req, res) {
 
 
 io.on('connection', function(socket) {
+    io.emit('load local storage');
     console.log('a user connected');
     socket.on('disconnect', function() {
         console.log('user disconnected');
