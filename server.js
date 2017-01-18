@@ -14,11 +14,19 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
+<<<<<<< HEAD
  });
+=======
+});
+>>>>>>> 4861767109e819aef5978a54839da443e2fa610e
 
 app.get('/main.js', function(req, res) {
     res.sendFile(__dirname + '/main.js');
- });
+});
+
+app.get('/styles.css', function(req, res) {
+    res.sendFile(__dirname + '/styles.css');
+});
 
 
 app.get('/main.css', function(req, res) {
@@ -83,6 +91,7 @@ app.post('/voice_upload', upload.single('file'), function(req, res, next) {
 
 
 io.on('connection', function(socket) {
+    io.emit('load local storage');
     console.log('a user connected');
     socket.on('disconnect', function() {
         console.log('user disconnected');
