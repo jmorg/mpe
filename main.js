@@ -11,15 +11,11 @@
 function storeInLocalStorage(m) {
     bodyHTML = document.body.innerHTML;
     
-    // If localStorage is full, splits the currently-stored
-    // conversation in half and stores that instead
+    // If localStorage is full, takes the 
     try {
         localStorage.setItem('messages', bodyHTML);   
     } catch(e) {
-        lines = currMessages.split(/\r?\n/);
-        lines.splice(0, lines.length/2);
-        currMessages = lines.join("\n");
-        localStorage.setItem('messages', currMessages);
+        
     }
 }
 
