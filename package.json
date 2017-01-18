@@ -4,6 +4,7 @@
   "description": "webchat app for cs210",
   "dependencies": {
     "body-parser": "^1.16.0",
+    "delivery": "0.0.6",
     "express": "^4.10.2",
     "multer": "^1.2.1",
     "nodemon": "^1.11.0",
