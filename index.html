@@ -1,13 +1,6 @@
 <!doctype html>
 <html>
     <head>
-        <title>Socket.IO chat</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div id="conversation">
-            <ul id="messages"></ul>
-        </div>
 
         <!DOCTYPE html>
 <!--
@@ -19,6 +12,21 @@
 -->
 <html>
 <head>
+        <title>Socket.IO chat</title>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="main.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="file-io.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    </head>
+    <body>
 
   <meta charset="utf-8">
   <meta name="description" content="WebRTC code samples">
@@ -31,7 +39,6 @@
 
   <base target="_blank">
 
-  <title>Peer connection</title>
 
   <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
   <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
@@ -51,7 +58,54 @@
       <button id="hangupButton">Hang Up</button>
     </div>
 
-  
+         <div id="conversation">
+            <ul id="messages"></ul>
+         </div>
+        <div class="outer">
+            <div style="display: none" id="share-image-pop" class="pop-up">
+                <h3 class="popup-title"> Share Image </h3>
+                 <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/img_upload" target="uploader_iframe">
+                    <div class="form-group">
+                        <input class="file-button" type="file" name="file">
+                        <label style="margin-left: 4%">Caption (Optional) </label><input id="img-caption" type="text">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+                <button class="close-button" type="button"> Close </button>
+            </div>
+        </div>
+
+        <div class="outer">
+            <div style="display: none"  id="share-video-pop" class="pop-up">
+                <h3 class="popup-title"> Share Video </h3>
+                <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/vid_upload" target="uploader_iframe">
+                    <div class="form-group">
+                        <input class="file-button" type="file" name="file">
+                        <label style="margin-left: 4%">Caption (Optional) </label><input id="img-caption" type="text">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+                <button class="close-button" type="button"> Close </button>
+            </div>
+        </div>
+
+        <div class="outer">
+            <div style="display: none"  id="share-voice-pop" class="pop-up">
+                <h3  class="popup-title"> Share Voice </h3>
+                <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/voice_upload" target="uploader_iframe">
+                    <div class="form-group">
+                        <input class="file-button" type="file" name="file">
+                        <label style="margin-left: 4%">Caption (Optional) </label><input id="img-caption" type="text">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+                <button class="close-button" type="button"> Close </button>
+            </div>
+        </div>
+ 
 
         <form action="">
             <input id="m" autocomplete="off" /><button>Send</button>
@@ -63,5 +117,37 @@
         <script src="common.js"></script>
         <script src="othermain.js"></script>
         <script src="ga.js"></script>
+        <div class="outer">
+            <div style="display: none"  id="share-link-pop" class="pop-up">
+                <h3  class="popup-title"> Share Link </h3>
+                <form class="upload-file form-inline" method="POST" enctype="multipart/form-data" action="/link_upload" target="uploader_iframe">
+                    <div class="form-group">
+                        <label style="margin-left: 4%">Link: </label><input id="hyperlink" name="hyperlink" type="text">
+                        <input class="send-button" name="submit" type="submit" value="Send">
+                    </div>
+                </form> 
+                <iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+                <button class="close-button" type="button"> Close </button>
+            </div>
+        </div>
+
+        <div class="fileshare-bar">
+            <div class="file-buttons">
+                <p id="share-image-help" style="display: none;"> Share Image </p>
+                <p id="share-video-help" style="display: none;"> Share Video </p>
+                <p id="share-voice-help" style="display: none;"> Share Voice Note </p>
+                <p id="share-link-help" style="display: none;"> Share Link </p>
+
+                <button id="share-image" data-toggle="modal" data-target="#blah" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-picture" style="size: 10px"></span></button>
+                <button id="share-video" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-film"></span> </button>
+                <button id="share-voice" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-headphones"></span></button>
+                <button id="share-link" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-qrcode"></span></button>
+            </div>
+
+        </div>
+
+        <form id="text-message" action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
     </body>
 </html>
