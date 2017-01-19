@@ -37,7 +37,7 @@
 
         socket.on('get link', function(togo) {
             var linkToGo = document.getElementById('hyperlink').value;
-            var frame = '<iframe frameborder="3" width="750px" height="750px" src="' + linkToGo + '"></iframe>';
+            var frame = '<iframe frameborder="3" width="600px" height="400px" src="' + linkToGo + '"></iframe>';
             var timeStamp = "<p class='time'><i>Delivered: " +  new Date().toLocaleString() + "</i></p>"
 
             var totalCode ='<li>' + frame + timeStamp + "</li>"

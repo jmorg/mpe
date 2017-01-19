@@ -2,8 +2,20 @@
 body 
 { 
     font: 13px Helvetica, Arial; 
+    overflow-x: hidden;
 }
 
+/* Toggle Styles */
+
+
+
+#vid-box {
+    float: left;
+}
+
+#conversation li {
+    padding: 14px 14px 0;
+}
 
 .time
 {
