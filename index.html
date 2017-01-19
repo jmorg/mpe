@@ -41,9 +41,9 @@
             <button class="btn btn-default navbar-btn" onclick="clearChatHistory();" value = "Clear history">Clear history</button>
         </div>
         </nav>
-        <div id="vid-box"></div>
-        <div id="conversation">
-            <ul id="messages"></ul>
+        <div id="vid-box" class="col-md-6 text-center"></div>
+        <div id="conversation" class="col-md-6 text-center">
+            <ul class="list-unstyled" id="messages"></ul>
         </div>
         <div class="outer">
             <div style="display: none" id="share-image-pop" class="pop-up">
@@ -103,11 +103,12 @@
                 <button class="close-button" type="button"> Close </button>
             </div>
         </div>
+
         <div class="fileshare-bar">
             <div class="file-buttons">
-                <form id="text-message" action="">
-            <input id="m" autocomplete="off" />
-            <button class="btn btn-default btn-wide">Send</button>
+            <form id="text-message" action="">
+                <input id="m"  class="form-control" autocomplete="off" />
+                <button class="btn btn-default btn-wide">Send</button>
             </form>
                 <p id="share-image-help" style="display: none;"> Share Image </p>
                 <p id="share-video-help" style="display: none;"> Share Video </p>
