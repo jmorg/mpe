@@ -62,6 +62,8 @@ function login(form) {
         number: form.username.value || "Anonymous",
         publish_key: 'pub-c-791ba55a-2fb0-4b91-b7ea-209bde6a78a7',
         subscribe_key: 'sub-c-ac391a7e-dde8-11e6-b2ae-0619f8945a4f',
+        media : {audio: true, video: true},
+        ssl : true,
     });
     phone.ready(function(){ form.username.style.background="#55ff5b"; });
     phone.receive(function(session){
