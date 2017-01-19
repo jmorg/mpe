@@ -30,6 +30,12 @@ function loadAllLocalStorage() {
     }
 }
 
+function clearChatHistory() {
+    window.localStorage.clear();
+    var convo = document.getElementById('conversation');
+    convo.innerHTML = "<ul id='messages'></ul>";
+}
+
 var socket = io();
 
 
