@@ -3,7 +3,6 @@
     <head>
         <title>Socket.IO chat</title>
 
-
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
         <script src="main.js"></script>
@@ -12,28 +11,37 @@
         <script src="https://cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
         <script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
 
-
         <script src="file-io.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="third_party/flat-ui/dist/css/flat-ui.css" rel="stylesheet">
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     </head>
     <body>
-        <div id="vid-box"></div>
+        <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Chat.io</a>
+            </div>
         <div class = "outer" id ="login-box">
-            <form name = "loginForm" id="login" action="#" onsubmit="return login(this);">
-                <input type="text" name="username" id="username" placeholder="Pick a username!"/>
-                <input type="submit" name = "login_submit" value = "Log in">
+            <form class="navbar-form navbar-right" name = "callForm" id = "call" action = "#" onsubmit = "return makeCall(this);">
+                <div class="form-group">
+                    <input class="form-control" type = "text" name = "number" placeholder="Enter user to dial!"/>
+                </div>
+                <button class="btn btn-default" type = "submit" value = "Call">Call</button>
             </form>
-            <form name = "callForm" id = "call" action = "#" onsubmit = "return makeCall(this);">
-                <input type = "text" name = "number" placeholder="Enter user to dial!"/>
-                <input type = "submit" value = "Call"/>
+            <form class="navbar-form navbar-right" name = "loginForm" id="login" action="#" onsubmit="return login(this);">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="username" id="username" placeholder="Pick a username!"/>
+                </div>
+                <button class="btn btn-default" type="submit" name = "login_submit" value = "Log in">Log in</button>
             </form>
+            <button class="btn btn-default navbar-btn" onclick="clearChatHistory();" value = "Clear history">Clear history</button>
         </div>
-
+        </nav>
+        <div id="vid-box"></div>
         <div id="conversation">
             <ul id="messages"></ul>
         </div>
@@ -95,9 +103,12 @@
                 <button class="close-button" type="button"> Close </button>
             </div>
         </div>
-
         <div class="fileshare-bar">
             <div class="file-buttons">
+                <form id="text-message" action="">
+            <input id="m" autocomplete="off" />
+            <button class="btn btn-default btn-wide">Send</button>
+            </form>
                 <p id="share-image-help" style="display: none;"> Share Image </p>
                 <p id="share-video-help" style="display: none;"> Share Video </p>
                 <p id="share-voice-help" style="display: none;"> Share Voice Note </p>
@@ -108,11 +119,6 @@
                 <button id="share-voice" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-headphones"></span></button>
                 <button id="share-link" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-qrcode"></span></button>
             </div>
-
         </div>
-
-        <form id="text-message" action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
-        </form>
     </body>
 </html>
