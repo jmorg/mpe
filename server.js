@@ -36,13 +36,17 @@ app.get('/uploadedFiles/*', function(req, res){
     res.sendFile(__dirname + req.url);
 });
 
+app.get('/third_party/*', function(req, res) {
+  res.sendFile(__dirname + req.url);
+});
+
 app.get("/img_upload", function(req, res){
     res.json({message: "Blah"});
 });
 
 app.get("/third_party/flat-ui/dist/css/flat-ui.css", function(req, res) {
   res.sendFile(__dirname + '/third_party/flat-ui/dist/css/flat-ui.css');
-})
+});
 
 app.post('/img_upload', upload.single('file'), function(req, res, next) {
   var file = 'uploadedFiles/' + req.file.filename +".jpg";
@@ -106,7 +110,7 @@ io.on('connection', function(socket) {
 });
 
 
-http.listen(3000, function() {
+http.listen(process.env.PORT || 5000, function() {
     console.log('listening on ' + process.env.PORT || 5000);
 });
 

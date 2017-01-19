@@ -25,7 +25,6 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Chat.io</a>
             </div>
-        <div id="vid-box"></div>
         <div class = "outer" id ="login-box">
             <form class="navbar-form navbar-right" name = "callForm" id = "call" action = "#" onsubmit = "return makeCall(this);">
                 <div class="form-group">
@@ -42,7 +41,7 @@
             <button class="btn btn-default navbar-btn" onclick="clearChatHistory();" value = "Clear history">Clear history</button>
         </div>
         </nav>
-
+        <div id="vid-box"></div>
         <div id="conversation">
             <ul id="messages"></ul>
         </div>
@@ -104,9 +103,12 @@
                 <button class="close-button" type="button"> Close </button>
             </div>
         </div>
-
         <div class="fileshare-bar">
             <div class="file-buttons">
+                <form id="text-message" action="">
+            <input id="m" autocomplete="off" />
+            <button class="btn btn-default btn-wide">Send</button>
+            </form>
                 <p id="share-image-help" style="display: none;"> Share Image </p>
                 <p id="share-video-help" style="display: none;"> Share Video </p>
                 <p id="share-voice-help" style="display: none;"> Share Voice Note </p>
@@ -117,11 +119,6 @@
                 <button id="share-voice" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-headphones"></span></button>
                 <button id="share-link" type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-qrcode"></span></button>
             </div>
-
         </div>
-
-        <form id="text-message" action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
-        </form>
     </body>
 </html>
